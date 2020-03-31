@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Степан Князев](https://up.htmlacademy.ru/ecmascript/11/user/274053).
-* Наставник: `Неизвестно`.
+* Наставник: Евгений Фаллер.
 
 ---
 
