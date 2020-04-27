@@ -1,22 +1,16 @@
 import {createElement} from "../utils.js";
 
-const createFilmSectionTemplate = () => {
-  return (
-    `<section class="films">
-      <section class="films-list">
-        <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
-      </section>
-    </section>`
-  );
+const createFooterStatisticsTemplate = () => {
+  return `<p>130 291 movies inside</p>`;
 };
 
-export default class FilmSection {
+export default class FooterStatistic {
   constructor() {
     this._element = null;
   }
 
   getTemplate() {
-    return createFilmSectionTemplate();
+    return createFooterStatisticsTemplate();
   }
 
   getElement() {

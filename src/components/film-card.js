@@ -1,7 +1,10 @@
-export const createFilmCardTemplate = (film) => {
+import {createElement} from "../utils.js";
+
+const createFilmCardTemplate = (film) => {
   const {poster, filmTitle, raiting, dateOfIssue, duration, movieGenre, description, commentsCount} = film;
   const year = dateOfIssue.substring(dateOfIssue.length - 4);
   const WORD_COUNT = 139;
+  const lengthDescription = description.length >= WORD_COUNT ? description.substring(0, WORD_COUNT) + `...` : description;
 
   return (
     `<article class="film-card">
@@ -13,7 +16,7 @@ export const createFilmCardTemplate = (film) => {
         <span class="film-card__genre">${movieGenre}</span>
       </p>
       <img src="${poster}" alt="" class="film-card__poster">
-      <p class="film-card__description">${description.length >= WORD_COUNT ? description.substring(0, WORD_COUNT) + `...` : description}</p>
+      <p class="film-card__description">${lengthDescription}</p>
       <a class="film-card__comments">${commentsCount} comments</a>
       <form class="film-card__controls">
         <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>
@@ -23,3 +26,27 @@ export const createFilmCardTemplate = (film) => {
     </article>`
   );
 };
+
+export default class Film {
+  constructor(film) {
+    this._film = film;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmCardTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

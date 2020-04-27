@@ -1,13 +1,18 @@
+import {createElement} from "../utils.js";
+
+const GENRE_COUNT = 1;
+
 const createPopapGenresMarkup = (movieGenre) => {
   return (
     `<span class="film-details__genre">${movieGenre}</span>`
   );
 };
 
-export const createPopapTemplate = (filmInfo) => {
+const createPopapTemplate = (film) => {
   const {poster, filmTitle, raiting, dateOfIssue, duration, movieGenre,
-    description, filmDirector, screenwriters, cast, country, ageRating} = filmInfo;
+    description, filmDirector, screenwriters, cast, country, ageRating} = film;
   const popapGenreMarkup = movieGenre.map((it) => createPopapGenresMarkup(it)).join(``);
+  const filmGenre = movieGenre.length > GENRE_COUNT ? `Genres` : `Genre`;
 
   return (
     `<section class="film-details">
@@ -61,7 +66,7 @@ export const createPopapTemplate = (filmInfo) => {
                   <td class="film-details__cell">${country}</td>
                 </tr>
                 <tr class="film-details__row">
-                  <td class="film-details__term">${movieGenre.length > 1 ? `Genres` : `Genre`}</td>
+                  <td class="film-details__term">${filmGenre}</td>
                   <td class="film-details__cell">
                     ${popapGenreMarkup}</td>
                 </tr>
@@ -88,3 +93,27 @@ export const createPopapTemplate = (filmInfo) => {
     </section>`
   );
 };
+
+export default class FilmDetail {
+  constructor(film) {
+    this._film = film;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createPopapTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

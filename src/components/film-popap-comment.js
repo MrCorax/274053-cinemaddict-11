@@ -1,3 +1,5 @@
+import {createElement} from "../utils.js";
+
 const createCommentPopapMarkup = (comment) => {
   const {commentText, emotion, commentAuthor, commentDate} = comment;
 
@@ -18,7 +20,7 @@ const createCommentPopapMarkup = (comment) => {
   );
 };
 
-export const createCommentPopapTemplate = (comments) => {
+const createCommentPopapTemplate = (comments) => {
   const commentPopapMarkup = comments.map((it) => createCommentPopapMarkup(it)).join(`\n`);
 
   return (
@@ -63,3 +65,27 @@ export const createCommentPopapTemplate = (comments) => {
     </div>`
   );
 };
+
+export default class Comments {
+  constructor(comments) {
+    this._comments = comments;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createCommentPopapTemplate(this._comments);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

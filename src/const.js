@@ -41,7 +41,7 @@ const MOVIE_GENRES = [
   `Film-Noir`
 ];
 
-const FILM_RATING = [`6+`, `12+`, `16+`, `18+`];
+const FILM_RATINGS = [`6+`, `12+`, `16+`, `18+`];
 
 const COUNTRIES = [
   `Russia`,
@@ -77,7 +77,7 @@ const MONTH_NAMES = [
   `December`,
 ];
 
-const COMMENT_TEXT = [
+const TEXT_COMMENTS = [
   `Interesting setting and a good cast`,
   `Booooooooooring`,
   `Very very old. Meh`,
@@ -86,7 +86,7 @@ const COMMENT_TEXT = [
   `Wow! must see!`
 ];
 
-const COMMENT_EMOTION = [
+const COMMENT_EMOTIONS = [
   `./images/emoji/sleeping.png`,
   `./images/emoji/smile.png`,
   `./images/emoji/puke.png`,
@@ -95,5 +95,5 @@ const COMMENT_EMOTION = [
 
 export {TITLE_FILMS, POSTER_FILMS,
   DESCRIPTION_FILMS, MOVIE_GENRES,
-  FILM_RATING, COUNTRIES, PEOPLE,
-  MONTH_NAMES, COMMENT_TEXT, COMMENT_EMOTION};
+  FILM_RATINGS, COUNTRIES, PEOPLE,
+  MONTH_NAMES, TEXT_COMMENTS, COMMENT_EMOTIONS};
