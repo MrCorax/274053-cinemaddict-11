@@ -2,7 +2,7 @@ import {TITLE_FILMS,
   POSTER_FILMS,
   DESCRIPTION_FILMS,
   MOVIE_GENRES,
-  FILM_RATING,
+  FILM_RATINGS,
   COUNTRIES,
   PEOPLE} from "../const.js";
 import {
@@ -27,7 +27,7 @@ const generateFilm = () => {
     screenwriters: getRandomArray(PEOPLE, getRandomIntegerValue(1, PEOPLE.length)).join(`, `),
     cast: getRandomArray(PEOPLE, getRandomIntegerValue(1, PEOPLE.length)).join(`, `),
     country: COUNTRIES[getRandomArrayItem(COUNTRIES)],
-    ageRating: FILM_RATING[getRandomArrayItem(FILM_RATING)]
+    ageRating: FILM_RATINGS[getRandomArrayItem(FILM_RATINGS)]
   };
 };
 
