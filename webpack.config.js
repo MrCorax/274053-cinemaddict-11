@@ -14,5 +14,11 @@ module.exports = {
     // По умолчанию приложение будет доступно по адресу http://localhost:8080
     // Лучше открывать в режиме инкогнито, что бы браузер не кэшировал файлы сборки
     watchContentBase: true
+  },
+  resolve: {
+    alias: {
+      Mock: path.resolve(__dirname, `src/mock`),
+      Components: path.resolve(__dirname, `src/components`)
+    }
   }
 };

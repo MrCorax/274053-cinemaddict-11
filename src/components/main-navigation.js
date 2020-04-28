@@ -1,4 +1,4 @@
-import {createElement} from "../utils.js";
+import {createElement} from "../utils";
 
 const createMainNavigationMarkup = (navigation, itemCount, isActive) => {
   const {name, count} = navigation;

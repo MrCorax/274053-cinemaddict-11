@@ -1,4 +1,4 @@
-import {PEOPLE, TEXT_COMMENTS, COMMENT_EMOTIONS} from "../const.js";
+import {PEOPLE, TEXT_COMMENTS, COMMENT_EMOTIONS} from "../consts.js";
 import {getRandomArrayItem, getRandomCommentDate} from "../utils.js";
 const newCommentDate = new Date();
 
