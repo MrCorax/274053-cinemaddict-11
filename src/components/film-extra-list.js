@@ -1,10 +1,9 @@
-import {createElement} from "../utils.js";
+import {createElement} from "../utils";
 
-const createFilmExtraTemplate = (blockName) => {
+const createFilmListExtraTemplate = (blockName) => {
   return (
     `<section class="films-list--extra">
       <h2 class="films-list__title">${blockName}</h2>
-      <div class="films-list__container"></div>
     </section>`
   );
 };
@@ -16,7 +15,7 @@ export default class FilmExtraSection {
   }
 
   getTemplate() {
-    return createFilmExtraTemplate(this._blockName);
+    return createFilmListExtraTemplate(this._blockName);
   }
 
   getElement() {

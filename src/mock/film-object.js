@@ -4,7 +4,7 @@ import {TITLE_FILMS,
   MOVIE_GENRES,
   FILM_RATINGS,
   COUNTRIES,
-  PEOPLE} from "../const.js";
+  PEOPLE} from "../consts.js";
 import {
   getRandomNumber,
   getRandomIntegerValue,

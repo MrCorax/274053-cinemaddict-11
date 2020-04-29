@@ -1,16 +1,15 @@
-import {createElement} from "../utils";
+import {createElement} from "../../utils";
+import {createPopupTemplate} from "./film-popup-tpl";
 
-const createBtnCardTemplate = () => {
-  return `<button class="films-list__show-more">Show more</button>`;
-};
+export default class FilmDetail {
+  constructor(film) {
+    this._film = film;
 
-export default class ShowMoreButton {
-  constructor() {
     this._element = null;
   }
 
   getTemplate() {
-    return createBtnCardTemplate();
+    return createPopupTemplate(this._film);
   }
 
   getElement() {

@@ -1,4 +1,4 @@
-const TITLE_FILMS = [
+export const TITLE_FILMS = [
   `Made for each other`,
   `Popoye meets sinbad`,
   `Sagebrush trail`,
@@ -8,7 +8,7 @@ const TITLE_FILMS = [
   `The man with the golden arm`
 ];
 
-const POSTER_FILMS = [
+export const POSTER_FILMS = [
   `./images/posters/made-for-each-other.png`,
   `./images/posters/popeye-meets-sinbad.png`,
   `./images/posters/sagebrush-trail.jpg`,
@@ -18,7 +18,7 @@ const POSTER_FILMS = [
   `./images/posters/the-man-with-the-golden-arm.jpg`
 ];
 
-const DESCRIPTION_FILMS = [
+export const DESCRIPTION_FILMS = [
   `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
   `Cras aliquet varius magna, non porta ligula feugiat eget.`,
   `Fusce tristique felis at fermentum pharetra.`,
@@ -31,7 +31,7 @@ const DESCRIPTION_FILMS = [
   `In rutrum ac purus sit amet tempus.`
 ];
 
-const MOVIE_GENRES = [
+export const MOVIE_GENRES = [
   `Musical`,
   `Western`,
   `Drama`,
@@ -41,9 +41,9 @@ const MOVIE_GENRES = [
   `Film-Noir`
 ];
 
-const FILM_RATINGS = [`6+`, `12+`, `16+`, `18+`];
+export const FILM_RATINGS = [`6+`, `12+`, `16+`, `18+`];
 
-const COUNTRIES = [
+export const COUNTRIES = [
   `Russia`,
   `USA`,
   `Germany`,
@@ -51,7 +51,7 @@ const COUNTRIES = [
   `Italian`
 ];
 
-const PEOPLE = [
+export const PEOPLE = [
   `Anthony Mann`,
   `Anne Wigton`,
   `Heinz Herald`,
@@ -62,7 +62,7 @@ const PEOPLE = [
   `Paul Malvern`
 ];
 
-const MONTH_NAMES = [
+export const MONTH_NAMES = [
   `January`,
   `February`,
   `March`,
@@ -77,7 +77,7 @@ const MONTH_NAMES = [
   `December`,
 ];
 
-const TEXT_COMMENTS = [
+export const TEXT_COMMENTS = [
   `Interesting setting and a good cast`,
   `Booooooooooring`,
   `Very very old. Meh`,
@@ -86,14 +86,23 @@ const TEXT_COMMENTS = [
   `Wow! must see!`
 ];
 
-const COMMENT_EMOTIONS = [
+export const COMMENT_EMOTIONS = [
   `./images/emoji/sleeping.png`,
   `./images/emoji/smile.png`,
   `./images/emoji/puke.png`,
   `./images/emoji/angry.png`
 ];
 
-export {TITLE_FILMS, POSTER_FILMS,
-  DESCRIPTION_FILMS, MOVIE_GENRES,
-  FILM_RATINGS, COUNTRIES, PEOPLE,
-  MONTH_NAMES, TEXT_COMMENTS, COMMENT_EMOTIONS};
+export const RenderPosition = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`
+};
+
+export const FilmSetting = {
+  COUNT: 15,
+  SHOWING_FILM_COUNT_ON_START: 5,
+  SHOWING_FILM_COUNT_BY_BUTTON: 5,
+  EXTRA_COUNT: 2
+};
+
+export const GENRE_COUNT = 1;

@@ -1,6 +1,4 @@
-import {createElement} from "../utils.js";
-
-const createCommentPopapMarkup = (comment) => {
+const createCommentPopupMarkup = (comment) => {
   const {commentText, emotion, commentAuthor, commentDate} = comment;
 
   return (
@@ -20,8 +18,8 @@ const createCommentPopapMarkup = (comment) => {
   );
 };
 
-const createCommentPopapTemplate = (comments) => {
-  const commentPopapMarkup = comments.map((it) => createCommentPopapMarkup(it)).join(`\n`);
+export const createCommentPopupTemplate = (comments) => {
+  const commentPopupMarkup = comments.map((it) => createCommentPopupMarkup(it)).join(`\n`);
 
   return (
     `<div class="form-details__bottom-container">
@@ -29,7 +27,7 @@ const createCommentPopapTemplate = (comments) => {
         <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${comments.length}</span></h3>
 
         <ul class="film-details__comments-list">
-          ${commentPopapMarkup}
+          ${commentPopupMarkup}
         </ul>
 
         <div class="film-details__new-comment">
@@ -65,27 +63,3 @@ const createCommentPopapTemplate = (comments) => {
     </div>`
   );
 };
-
-export default class Comments {
-  constructor(comments) {
-    this._comments = comments;
-
-    this._element = null;
-  }
-
-  getTemplate() {
-    return createCommentPopapTemplate(this._comments);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
-  }
-}
