@@ -1,5 +1,4 @@
-import {MONTH_NAMES} from "./consts";
-import {RenderPosition} from "./consts";
+import {MONTH_NAMES} from "../consts";
 
 // генератор случайного числа для оценки
 export const getRandomNumber = (min, max) => {
@@ -44,25 +43,4 @@ export const getRandomCommentDate = (date) => {
   const minutes = date.getMinutes();
 
   return `${year}/${month}/${day} ${hours}:${minutes}`;
-};
-
-export const createElement = (template) => {
-  const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
-
-  return newElement.firstChild;
-};
-
-export const render = (container, element, place) => {
-  switch (place) {
-    case RenderPosition.AFTERBEGIN:
-      container.prepend(element);
-      break;
-    case RenderPosition.BEFOREEND:
-      container.append(element);
-      break;
-    case RenderPosition.AFTEREND:
-      container.after(element);
-      break;
-  }
 };

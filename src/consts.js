@@ -95,7 +95,9 @@ export const COMMENT_EMOTIONS = [
 
 export const RenderPosition = {
   AFTERBEGIN: `afterbegin`,
-  BEFOREEND: `beforeend`
+  BEFOREEND: `beforeend`,
+  AFTEREND: `afterend`,
+  BEFOREBEGAN: `beforebegan`
 };
 
 export const FilmSetting = {
@@ -106,3 +108,19 @@ export const FilmSetting = {
 };
 
 export const GENRE_COUNT = 1;
+
+export const SortType = {
+  SORT_BY_DATE: `sort-by-date`,
+  SORT_BY_RATING: `sort-by-rating`,
+  DEFAULT: `default`
+};
+
+export const ActiveType = {
+  ACTIVE: `active`,
+  NON_ACTIVE: `non-active`
+};
+
+export const isEscPressed = (evt) => {
+  const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
+  return isEscKey;
+};

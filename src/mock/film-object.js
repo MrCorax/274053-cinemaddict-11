@@ -4,16 +4,16 @@ import {TITLE_FILMS,
   MOVIE_GENRES,
   FILM_RATINGS,
   COUNTRIES,
-  PEOPLE} from "../consts.js";
+  PEOPLE} from "../consts";
 import {
   getRandomNumber,
   getRandomIntegerValue,
   getRandomArrayItem,
   getRandomArray,
-  getRandomDate} from "../utils.js";
+  getRandomDate} from "Utils/common";
 const newDate = new Date();
 
-const generateFilm = () => {
+export const generateFilm = () => {
   return {
     poster: POSTER_FILMS[getRandomArrayItem(POSTER_FILMS)],
     filmTitle: TITLE_FILMS[getRandomArrayItem(TITLE_FILMS)],
@@ -31,10 +31,8 @@ const generateFilm = () => {
   };
 };
 
-const generateFilms = (count) => {
+export const generateFilms = (count) => {
   return new Array(count)
     .fill(``)
     .map(generateFilm);
 };
-
-export {generateFilm, generateFilms};

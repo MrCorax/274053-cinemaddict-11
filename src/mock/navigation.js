@@ -1,10 +1,10 @@
-import {FilmSetting} from "../consts.js";
+import {FilmSetting} from "../consts";
 
 const navigationItemNames = [
   `All movies`, `Watchlist`, `History`, `Favorites`
 ];
 
-const generateNavigation = () => {
+export const generateNavigation = () => {
   return navigationItemNames.map((it) => {
     return {
       name: it,
@@ -12,5 +12,3 @@ const generateNavigation = () => {
     };
   });
 };
-
-export {generateNavigation};
