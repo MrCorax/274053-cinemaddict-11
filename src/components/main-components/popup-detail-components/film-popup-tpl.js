@@ -1,4 +1,4 @@
-import {GENRE_COUNT} from "../../consts";
+import {GENRE_COUNT} from "../../../consts";
 
 const createPopupGenresMarkup = (movieGenre) => {
   return (

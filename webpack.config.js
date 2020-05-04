@@ -18,7 +18,14 @@ module.exports = {
   resolve: {
     alias: {
       Mock: path.resolve(__dirname, `src/mock`),
-      Components: path.resolve(__dirname, `src/components`)
+      Components: path.resolve(__dirname, `src/components`),
+      HeaderComponents: path.resolve(__dirname, `src/components/header-components`),
+      MainComponents: path.resolve(__dirname, `src/components/main-components`),
+        FilmComponents: path.resolve(__dirname, `src/components/main-components/film-components`),
+        PopupDetail: path.resolve(__dirname, `src/components/main-components/popup-detail-components`),
+      FooterComponents: path.resolve(__dirname, `src/components/footer-components`),
+      Utils: path.resolve(__dirname, `src/utils`),
+      Controllers: path.resolve(__dirname, `src/controllers`)
     }
   }
 };
