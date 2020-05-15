@@ -1,19 +1,19 @@
-import UserLevelComponent from "HeaderComponents/user-level";
-import MainNavigationComponent from "MainComponents/main-navigation";
-import FilmSectionComponent from "FilmComponents/film-section";
-import FooterStatisticsComponent from "FooterComponents/footer-statistics";
-import PageController from "Controllers/page";
-import {generateNavigation} from "Mock/navigation";
-import {generateFilms} from "Mock/film-object";
-import {render} from "Utils/render";
-import {FilmSetting, RenderPosition} from "./consts";
+import UserLevelComponent from "components/header-components/user-level";
+import MainNavigationComponent from "components/main-components/main-navigation";
+import FilmSectionComponent from "components/main-components/film-components/film-section";
+import FooterStatisticsComponent from "components/footer-components/footer-statistics";
+import PageController from "controllers/page";
+import {generateNavigation} from "mock/navigation";
+import {generateFilms} from "mock/film-object";
+import {render} from "utils/render";
+import {Count, RenderPosition} from "./consts";
 
 const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 export const siteFooterElement = document.querySelector(`.footer`);
 
 const navigations = generateNavigation();
-const filmInfo = generateFilms(FilmSetting.COUNT);
+const filmInfo = generateFilms(Count.FILMS);
 
 render(siteHeaderElement, new UserLevelComponent(), RenderPosition.BEFOREEND);
 render(siteMainElement, new MainNavigationComponent(navigations), RenderPosition.BEFOREEND);

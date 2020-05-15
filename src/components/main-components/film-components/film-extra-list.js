@@ -1,4 +1,4 @@
-import AbstractComponent from "Components/abstract-component";
+import AbstractComponent from "components/abstract-component";
 
 const createFilmListExtraTemplate = (blockName) => {
   return (

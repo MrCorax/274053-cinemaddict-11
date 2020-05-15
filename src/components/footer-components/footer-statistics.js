@@ -1,8 +1,8 @@
-import AbstractComponent from "Components/abstract-component";
-import {FilmSetting} from "../../consts";
+import AbstractComponent from "components/abstract-component";
+import {Count} from "../../consts";
 
 const createFooterStatisticsTemplate = () => {
-  return `<p>${FilmSetting.COUNT} movies inside</p>`;
+  return `<p>${Count.FILMS} movies inside</p>`;
 };
 
 export default class FooterStatistic extends AbstractComponent {

@@ -10,7 +10,7 @@ import {
   getRandomIntegerValue,
   getRandomArrayItem,
   getRandomArray,
-  getRandomDate} from "Utils/common";
+  getRandomDate} from "utils/common";
 const newDate = new Date();
 
 export const generateFilm = () => {
@@ -27,7 +27,10 @@ export const generateFilm = () => {
     screenwriters: getRandomArray(PEOPLE, getRandomIntegerValue(1, PEOPLE.length)).join(`, `),
     cast: getRandomArray(PEOPLE, getRandomIntegerValue(1, PEOPLE.length)).join(`, `),
     country: COUNTRIES[getRandomArrayItem(COUNTRIES)],
-    ageRating: FILM_RATINGS[getRandomArrayItem(FILM_RATINGS)]
+    ageRating: FILM_RATINGS[getRandomArrayItem(FILM_RATINGS)],
+    isAddWatchlist: Math.random() > 0.5,
+    isWatched: Math.random() > 0.5,
+    isFavorite: Math.random() > 0.5
   };
 };
 

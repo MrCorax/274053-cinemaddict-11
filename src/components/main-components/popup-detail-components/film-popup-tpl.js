@@ -1,4 +1,4 @@
-import {GENRE_COUNT} from "../../../consts";
+import {Count} from "../../../consts";
 
 const createPopupGenresMarkup = (movieGenre) => {
   return (
@@ -10,7 +10,7 @@ export const createPopupTemplate = (film) => {
   const {poster, filmTitle, raiting, dateOfIssue, duration, movieGenre,
     description, filmDirector, screenwriters, cast, country, ageRating} = film;
   const popupGenreMarkup = movieGenre.map((it) => createPopupGenresMarkup(it)).join(``);
-  const filmGenre = movieGenre.length > GENRE_COUNT ? `Genres` : `Genre`;
+  const filmGenre = movieGenre.length > Count.GENRE ? `Genres` : `Genre`;
 
   return (
     `<section class="film-details">
@@ -77,13 +77,13 @@ export const createPopupTemplate = (film) => {
           </div>
 
           <section class="film-details__controls">
-            <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist">
+            <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist" ${!film.isAddWatchlist ? `` : `checked`}>
             <label for="watchlist" class="film-details__control-label film-details__control-label--watchlist">Add to watchlist</label>
 
-            <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched">
+            <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched" ${!film.isWatched ? `` : `checked`}>
             <label for="watched" class="film-details__control-label film-details__control-label--watched">Already watched</label>
 
-            <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite">
+            <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite" ${!film.isFavorite ? `` : `checked`}>
             <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
           </section>
         </div>

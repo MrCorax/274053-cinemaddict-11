@@ -1,4 +1,4 @@
-import AbstractComponent from "Components/abstract-component";
+import AbstractComponent from "components/abstract-component";
 import {createCommentPopupTemplate} from "./film-popup-comment-tpl";
 
 export default class Comments extends AbstractComponent {

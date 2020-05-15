@@ -21,6 +21,8 @@ export const render = (container, component, place) => {
     case RenderPosition.BEFOREBEGAN:
       container.before(component.getElement());
       break;
+    default:
+      break;
   }
 };
 

@@ -100,14 +100,22 @@ export const RenderPosition = {
   BEFOREBEGAN: `beforebegan`
 };
 
-export const FilmSetting = {
-  COUNT: 15,
-  SHOWING_FILM_COUNT_ON_START: 5,
-  SHOWING_FILM_COUNT_BY_BUTTON: 5,
-  EXTRA_COUNT: 2
+export const Count = {
+  FILMS: 15,
+  GENRE: 1,
+  SYMBOLS: 139
 };
 
-export const GENRE_COUNT = 1;
+
+export const FilmSetting = {
+  SHOWING_FILM_COUNT_ON_START: 5,
+  SHOWING_FILM_COUNT_BY_BUTTON: 5,
+};
+
+export const BlockName = {
+  TOP_RATED: `Top Rated`,
+  MOST_COMMENTED: `Most Commented`
+};
 
 export const SortType = {
   SORT_BY_DATE: `sort-by-date`,
@@ -120,7 +128,4 @@ export const ActiveType = {
   NON_ACTIVE: `non-active`
 };
 
-export const isEscPressed = (evt) => {
-  const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
-  return isEscKey;
-};
+export const isEscPressed = (evt) => evt.key === `Escape` || evt.key === `Esc`;

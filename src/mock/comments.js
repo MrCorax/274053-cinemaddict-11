@@ -1,5 +1,5 @@
 import {PEOPLE, TEXT_COMMENTS, COMMENT_EMOTIONS} from "../consts";
-import {getRandomArrayItem, getRandomCommentDate} from "Utils/common";
+import {getRandomArrayItem, getRandomCommentDate} from "utils/common";
 const newCommentDate = new Date();
 
 const generateComment = () => {
