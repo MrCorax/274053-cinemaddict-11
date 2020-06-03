@@ -1,100 +1,103 @@
 import FilmCardComponent from "components/main-components/film-components/film-card";
 import PopupComponent from "components/main-components/popup-detail-components/film-popup-detail";
 import CommentPopupComponent from "components/main-components/popup-detail-components/film-popup-comment";
-import {RenderPosition, isEscPressed} from "../consts";
+import {RenderPosition, isEscPressed, Mode} from "../consts";
 import {generateComments} from "mock/comments";
-import {siteFooterElement} from "../main";
-import {render, remove} from "utils/render";
+import {render, replace} from "utils/render";
 
 export default class MovieController {
-  constructor(container, onDataChange) {
+  constructor(container, onDataChange, onViewChange) {
     this._container = container;
     this._onDataChange = onDataChange;
-
+    this._onViewChange = onViewChange;
+    this._mode = Mode.DEFAULT;
     this._filmCardComponent = null;
-    this._popupComponent = null;
+    this._filmPopupComponent = null;
 
     this._onPopupEscPress = this._onPopupEscPress.bind(this);
   }
 
   render(film) {
 
+    const oldFilmComponent = this._filmCardComponent;
+    const oldFilmPopupComponent = this._filmPopupComponent;
+
     this._filmCardComponent = new FilmCardComponent(film);
-    this._filmCardComponent.setOpenPopupByPoster(() => {
-      this._onFilmCardClick(film);
-    });
-    this._filmCardComponent.setOpenPopupByTitle(() => {
-      this._onFilmCardClick(film);
-    });
-    this._filmCardComponent.setOpenPopupByComments(() => {
-      this._onFilmCardClick(film);
-    });
+    this._filmPopupComponent = new PopupComponent(film);
 
-    this._filmCardComponent.setAddWatchlistBtnClickHandler((evt) => {
+    const onClickFilmCard = (evt) => {
+      switch (evt.target.className) {
+        case `film-card__comments`:
+        case `film-card__poster`:
+        case `film-card__title`:
+          this._replaceFilmToPopup(film);
+          document.addEventListener(`keydown`, this._onPopupEscPress);
+          break;
+        default:
+          break;
+      }
+    };
+
+    this._filmCardComponent.setOpenPopupClickHandler(onClickFilmCard);
+
+    const onClickFilmCardControls = (evt) => {
       evt.preventDefault();
-      this._onDataChange(this, film, Object.assign({}, film, {
-        isAddWatchlist: !film.isAddWatchlist,
-      }));
-    });
+      switch (evt.target.dataset.name) {
+        case `Add to watchlist`:
+          this._onDataChange(film, Object.assign({}, film, {
+            isAddWatchlist: !film.isAddWatchlist
+          }));
+          break;
+        case `Mark as watched`:
+          this._onDataChange(film, Object.assign({}, film, {
+            isWatched: !film.isWatched
+          }));
+          break;
+        case `Mark as favorite`:
+          this._onDataChange(film, Object.assign({}, film, {
+            isFavorite: !film.isFavorite
+          }));
+          break;
+        default:
+          break;
+      }
+    };
 
-    this._filmCardComponent.setAlredyWatchedBtnClickHandler((evt) => {
-      evt.preventDefault();
-      this._onDataChange(this, film, Object.assign({}, film, {
-        isWatched: !film.isWatched,
-      }));
-    });
+    this._filmCardComponent.setFilmCardControlsClickHandler(onClickFilmCardControls);
+    this._filmPopupComponent.setDetailsFilmControlsCheckBoxChangeHandler(onClickFilmCardControls);
 
-    this._filmCardComponent.setAddFavoritesBtnClickHandler((evt) => {
-      evt.preventDefault();
-      this._onDataChange(this, film, Object.assign({}, film, {
-        isFavorite: !film.isFavorite,
-      }));
-    });
-
-    render(this._container, this._filmCardComponent, RenderPosition.BEFOREEND);
-  }
-
-  _onFilmCardClick(film) {
-    this._popupComponent = new PopupComponent(film);
-    const body = document.querySelector(`body`);
-
-    if (body.querySelector(`.film-details`)) {
-      body.querySelector(`.film-details`).remove();
-    }
-
-    render(siteFooterElement, this._popupComponent, RenderPosition.AFTEREND);
-    const popupFormElement = this._popupComponent.getElement().querySelector(`.film-details__inner`);
-    render(popupFormElement, new CommentPopupComponent(generateComments(film.commentsCount)), RenderPosition.BEFOREEND);
-
-    document.addEventListener(`keydown`, this._onPopupEscPress);
-
-    this._popupComponent.setButtonPopupClose(() => {
+    this._filmPopupComponent.setButtonPopupClose(() => {
       this._onButtonCloseClick();
     });
 
-    this._popupComponent.setAddWatchlistCheckBoxChangeHandler(() => {
-      this._onDataChange(this, film, Object.assign({}, film, {
-        isAddWatchlist: !film.isAddWatchlist,
-      }));
-    });
+    const popupCommentElement = this._filmPopupComponent.getElement().querySelector(`.film-details__new-comment`);
+    render(popupCommentElement, new CommentPopupComponent(generateComments(film.commentsCount)), RenderPosition.BEFOREBEGAN);
 
-    this._popupComponent.setAlredyWatchedCheckBoxChangeHandler(() => {
-      this._onDataChange(this, film, Object.assign({}, film, {
-        isWatched: !film.isWatched,
-      }));
-    });
+    if (oldFilmComponent && oldFilmPopupComponent) {
+      replace(this._filmCardComponent, oldFilmComponent);
+      replace(this._filmPopupComponent, oldFilmPopupComponent);
+    } else {
+      render(this._container, this._filmCardComponent, RenderPosition.BEFOREEND);
+    }
+  }
 
-    this._popupComponent.setAddFavoriteCheckBoxChangeHandler(() => {
-      this._onDataChange(this, film, Object.assign({}, film, {
-        isFavorite: !film.isFavorite,
-      }));
-    });
+  setDefaultView() {
+    if (this._mode !== Mode.DEFAULT) {
+      this._onButtonCloseClick();
+    }
+  }
 
+  _replaceFilmToPopup() {
+    this._onViewChange();
+    replace(this._filmPopupComponent, this._filmCardComponent);
+    this._mode = Mode.EDIT;
   }
 
   _onButtonCloseClick() {
-    remove(this._popupComponent);
     document.removeEventListener(`keydown`, this._onPopupEscPress);
+    this._filmPopupComponent.reset();
+    replace(this._filmCardComponent, this._filmPopupComponent);
+    this._mode = Mode.DEFAULT;
   }
 
   _onPopupEscPress(evt) {

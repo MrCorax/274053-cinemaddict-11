@@ -23,7 +23,7 @@ render(siteMainElement, filmSectionComponent, RenderPosition.BEFOREEND);
 pageController.render(filmInfo);
 render(siteFooterElement, new FooterStatisticsComponent(), RenderPosition.BEFOREEND);
 
-// Обработчик переключателя для меню и сортировки
+// Обработчик переключателя для меню и сортировки, ненужный в таком виде и на данном участке.
 const siteNavigation = siteMainElement.querySelector(`.main-navigation`);
 const siteNavigationLinks = siteNavigation.querySelectorAll(`.main-navigation__item`);
 const siteSortbuttons = siteMainElement.querySelectorAll(`.sort__button`);

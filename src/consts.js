@@ -129,3 +129,15 @@ export const ActiveType = {
 };
 
 export const isEscPressed = (evt) => evt.key === `Escape` || evt.key === `Esc`;
+
+export const EMOJI_VALUE = [
+  `smile`,
+  `sleeping`,
+  `puke`,
+  `angry`
+];
+
+export const Mode = {
+  DEFAULT: `default`,
+  EDIT: `edit`,
+};

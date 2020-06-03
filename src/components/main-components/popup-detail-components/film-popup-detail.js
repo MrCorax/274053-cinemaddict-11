@@ -7,70 +7,60 @@ export default class FilmDetail extends AbstractSmartComponent {
 
     this._film = film;
 
-    // this._subscribeOnEvents();
+    this._changeHandler = null;
+    this._clickHandler = null;
+    this._isEmojiActive = null;
+    this._emojiName = null;
+    this._emojiSrc = null;
+    this._changeEmojiLabel();
   }
 
   getTemplate() {
-    return createPopupTemplate(this._film);
+    return createPopupTemplate(this._film, {
+      isEmojiActive: this._isEmojiActive,
+      emojiName: this._emojiName,
+      emojiSrc: this._emojiSrc
+    });
   }
 
   recoveryListeners() {
-    // this.setButtonPopupClose();
-    // this._subscribeOnEvents();
+    this.setDetailsFilmControlsCheckBoxChangeHandler(this._changeHandler);
+    this.setButtonPopupClose(this._clickHandler);
+    this._changeEmojiLabel();
   }
 
   rerender() {
     super.rerender();
   }
 
+  reset() {
+    this._isEmojiActive = null;
+    this._emojiName = null;
+    this._emojiSrc = null;
+
+    this.rerender();
+  }
+
   setButtonPopupClose(handler) {
     this.getElement().querySelector(`.film-details__close-btn`)
       .addEventListener(`click`, handler);
+    this._clickHandler = handler;
   }
 
-  // _subscribeOnEvents() {
-  //   const element = this.getElement();
-  //
-  //   element.querySelector(`input[name = watchlist]`)
-  //     .addEventListener(`change`, () => {
-  //       this._isAddWatchlist = !this._isAddWatchlist;
-  //
-  //       this.rerender();
-  //     });
-  //
-  //   element.querySelector(`input[name = watchlist]`)
-  //     .addEventListener(`change`, () => {
-  //       this._isWatched = !this._isWatched;
-  //
-  //       this.rerender();
-  //     });
-  //
-  //   element.querySelector(`input[name = favorite]`)
-  //     .addEventListener(`change`, () => {
-  //       this._isFavorite = !this._isFavorite;
-  //
-  //       this.rerender();
-  //     });
-  // }
+  _changeEmojiLabel() {
+    this.getElement().querySelector(`.film-details__emoji-list`)
+      .addEventListener(`change`, (evt) => {
+        this._isEmojiActive = evt.target.checked;
+        this._emojiName = evt.target.id;
+        this._emojiSrc = evt.target.nextElementSibling.lastElementChild.src;
 
-  setAddWatchlistCheckBoxChangeHandler(handler) {
-    this.getElement().querySelector(`input[name = watchlist]`)
+        this.rerender();
+      });
+  }
+
+  setDetailsFilmControlsCheckBoxChangeHandler(handler) {
+    this.getElement().querySelector(`.film-details__controls`)
       .addEventListener(`change`, handler);
+    this._changeHandler = handler;
   }
-
-  setAlredyWatchedCheckBoxChangeHandler(handler) {
-    this.getElement().querySelector(`input[name = watched]`)
-      .addEventListener(`change`, handler);
-  }
-
-  setAddFavoriteCheckBoxChangeHandler(handler) {
-    this.getElement().querySelector(`input[name = favorite]`)
-      .addEventListener(`change`, handler);
-  }
-
-  // setCheckBoxChangeHandler(handler) {
-  //   this.getElement().querySelectorAll(`.film-details__control-input`).forEach((checkbox) => {
-  //     checkbox.addEventListener(`change`, handler);
-  //   });
-  // }
 }

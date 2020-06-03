@@ -8,9 +8,9 @@ import MovieController from "./film.js";
 import {FilmSetting, RenderPosition, BlockName, Count, SortType} from "../consts";
 import {render, remove} from "utils/render";
 
-const renderFilms = (filmContainerElement, films, onDataChange) => {
+const renderFilms = (filmContainerElement, films, onDataChange, onViewChange) => {
   return films.map((film) => {
-    const movieController = new MovieController(filmContainerElement, onDataChange);
+    const movieController = new MovieController(filmContainerElement, onDataChange, onViewChange);
 
     movieController.render(film);
 
@@ -53,8 +53,11 @@ export default class PageController {
     this._showMoreBtnComponent = new ShowMoreBtnComponent();
     this._filmExtraListTopRatedComponent = new FilmExtraListComponent(BlockName.TOP_RATED);
     this._filmExtraListMostCommentedComponent = new FilmExtraListComponent(BlockName.MOST_COMMENTED);
+
     this._onDataChange = this._onDataChange.bind(this);
     this._onSortTypeChange = this._onSortTypeChange.bind(this);
+    this._onViewChange = this._onViewChange.bind(this);
+
     this._sortComponent.setSortTypeChangeHandler(this._onSortTypeChange);
   }
 
@@ -75,7 +78,7 @@ export default class PageController {
     render(filmListElement, this._filmsContainerComponent, RenderPosition.BEFOREEND);
     const filmContainerElement = this._filmsContainerComponent.getElement();
 
-    const newFilms = renderFilms(filmContainerElement, this._films.slice(0, this._showingFilmsCount), this._onDataChange);
+    const newFilms = renderFilms(filmContainerElement, this._films.slice(0, this._showingFilmsCount), this._onDataChange, this._onViewChange);
     this._showedMovieControllers = this._showedMovieControllers.concat(newFilms);
 
     render(container, this._filmExtraListTopRatedComponent, RenderPosition.BEFOREEND);
@@ -91,10 +94,10 @@ export default class PageController {
 
       if (isTopRated) {
         const topRatedFilmInfo = this._films.slice().sort((a, b) => b.raiting - a.raiting);
-        renderFilms(filmExtraContainerElements, topRatedFilmInfo.slice(0, filmListExtraElement.length), this._onDataChange);
+        renderFilms(filmExtraContainerElements, topRatedFilmInfo.slice(0, filmListExtraElement.length), this._onDataChange, this._onViewChange);
       } else if (isMostCommented) {
         const mostCommentedFilmInfo = this._films.slice().sort((a, b) => b.commentsCount - a.commentsCount);
-        renderFilms(filmExtraContainerElements, mostCommentedFilmInfo.slice(0, filmListExtraElement.length), this._onDataChange);
+        renderFilms(filmExtraContainerElements, mostCommentedFilmInfo.slice(0, filmListExtraElement.length), this._onDataChange, this._onViewChange);
       }
     });
 
@@ -115,7 +118,7 @@ export default class PageController {
       this._showingFilmsCount = this._showingFilmsCount + FilmSetting.SHOWING_FILM_COUNT_BY_BUTTON;
 
       const sortedFilms = getSortedFilms(this._films, this._sortComponent.getSortType(), prevFilmsCount, this._showingFilmsCount);
-      const newFilms = renderFilms(filmContainerElement, sortedFilms, this._onDataChange);
+      const newFilms = renderFilms(filmContainerElement, sortedFilms, this._onDataChange, this._onViewChange);
 
       this._showedMovieControllers = this._showedMovieControllers.concat(newFilms);
 
@@ -133,13 +136,17 @@ export default class PageController {
 
     filmContainerElement.innerHTML = ``;
 
-    const newFilms = renderFilms(filmContainerElement, sortedFilms, this._onDataChange);
+    const newFilms = renderFilms(filmContainerElement, sortedFilms, this._onDataChange, this._onViewChange);
     this._showedMovieControllers = newFilms;
 
     this._renderShowMoreBtn();
   }
 
-  _onDataChange(movieController, oldData, newData) {
+  _onViewChange() {
+    this._showedMovieControllers.forEach((it) => it.setDefaultView());
+  }
+
+  _onDataChange(oldData, newData) {
     const index = this._films.findIndex((it) => it === oldData);
 
     if (index === -1) {
@@ -148,6 +155,6 @@ export default class PageController {
 
     this._films = [].concat(this._films.slice(0, index), newData, this._films.slice(index + 1));
 
-    movieController.render(this._films[index]);
+    this._showedMovieControllers[index].render(this._films[index]);
   }
 }

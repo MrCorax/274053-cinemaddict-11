@@ -1,10 +1,10 @@
-import AbstractSmartComponent from "components/abstract-smart-component";
+import AbstractComponent from "components/abstract-component";
 import {Count} from "../../../consts";
 
 const createButtonMarkup = (className, name, isActive = true) => {
   return (
     `<button class="film-card__controls-item
-      button film-card__controls-item--${className} ${isActive ? `` : `film-card__controls-item--active`}"
+      button film-card__controls-item--${className} ${isActive ? `` : `film-card__controls-item--active`}" data-name="${name}"
       >${name}</button>`
   );
 };
@@ -38,58 +38,25 @@ const createFilmCardTemplate = (film) => {
   );
 };
 
-export default class Film extends AbstractSmartComponent {
+export default class Film extends AbstractComponent {
   constructor(film) {
     super();
 
     this._film = film;
-    this._isAddWatchlist = film.isAddWatchlist;
-    this._isWatched = film.isWatched;
-    this._isFavorite = film.isFavorite;
   }
 
   getTemplate() {
     return createFilmCardTemplate(this._film);
   }
 
-  recoveryListeners() {
-    this.setAddWatchlistBtnClickHandler();
-    this.setAlredyWatchedBtnClickHandler();
-    this.setAddFavoritesBtnClickHandler();
+  // обработчик открытия попапа
+  setOpenPopupClickHandler(handler) {
+    this.getElement().addEventListener(`click`, handler);
   }
 
-  rerender() {
-    super.rerender();
-  }
-  // обработчики открытия попапа
-  setOpenPopupByPoster(handler) {
-    this.getElement().querySelector(`.film-card__poster`)
-      .addEventListener(`click`, handler);
-  }
-
-  setOpenPopupByTitle(handler) {
-    this.getElement().querySelector(`.film-card__title`)
-      .addEventListener(`click`, handler);
-  }
-
-  setOpenPopupByComments(handler) {
-    this.getElement().querySelector(`.film-card__comments`)
-      .addEventListener(`click`, handler);
-  }
-
-  // обработчики кнопок «Add to watchlist», «Already watched», «Add to favorites»
-  setAddWatchlistBtnClickHandler(handler) {
-    this.getElement().querySelector(`.film-card__controls-item--add-to-watchlist`)
-      .addEventListener(`click`, handler);
-  }
-
-  setAlredyWatchedBtnClickHandler(handler) {
-    this.getElement().querySelector(`.film-card__controls-item--mark-as-watched`)
-      .addEventListener(`click`, handler);
-  }
-
-  setAddFavoritesBtnClickHandler(handler) {
-    this.getElement().querySelector(`.film-card__controls-item--favorite`)
+  // обработчик кнопок «Add to watchlist», «Already watched», «Add to favorites»
+  setFilmCardControlsClickHandler(handler) {
+    this.getElement().querySelector(`.film-card__controls`)
       .addEventListener(`click`, handler);
   }
 }
